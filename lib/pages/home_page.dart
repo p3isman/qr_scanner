@@ -8,6 +8,7 @@ import 'package:qr_scanner/pages/directions_page.dart';
 import 'package:qr_scanner/pages/maps_page.dart';
 
 import 'package:qr_scanner/providers/ui_provider.dart';
+import 'package:qr_scanner/providers/db_provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -37,6 +38,9 @@ class _HomePageBody extends StatelessWidget {
     final uiProvider = Provider.of<UiProvider>(context);
 
     final currentIndex = uiProvider.selectedMenuOpt;
+
+    // Read database
+    DBProvider.dbProvider.database;
 
     // Tab management
     switch (currentIndex) {

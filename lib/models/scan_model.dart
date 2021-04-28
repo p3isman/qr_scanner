@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 // To parse this JSON data, do
 //
 //     final scanModel = scanModelFromJson(jsonString);

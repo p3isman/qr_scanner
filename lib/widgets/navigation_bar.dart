@@ -11,6 +11,7 @@ class NavigationBar extends StatelessWidget {
     final currentIndex = uiProvider.selectedMenuOpt;
 
     return BottomNavigationBar(
+      elevation: 0,
       onTap: (i) {
         uiProvider.selectedMenuOpt = i;
       },
