@@ -39,8 +39,10 @@ class _HomePageBody extends StatelessWidget {
 
     final currentIndex = uiProvider.selectedMenuOpt;
 
+    final tempScan = new ScanModel(value: 'http://duckduckgo.com');
+
     // Read database
-    DBProvider.dbProvider.database;
+    DBProvider.db.newScan(tempScan);
 
     // Tab management
     switch (currentIndex) {

@@ -5,12 +5,12 @@ class UiProvider extends ChangeNotifier {
 
   // Getter uses {}
   int get selectedMenuOpt {
-    return this._selectedMenuOpt;
+    return _selectedMenuOpt;
   }
 
   // Setter acts like a function
   set selectedMenuOpt(int i) {
-    this._selectedMenuOpt = i;
+    _selectedMenuOpt = i;
 
     // Triggers changes to widgets that are listening to this
     notifyListeners();
