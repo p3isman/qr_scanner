@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:qr_scanner/models/scan_model.dart';
+import 'package:qr_scanner/providers/scan_list_provider.dart';
+import 'package:qr_scanner/utils/utils.dart';
+
 class ScanButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -8,9 +14,21 @@ class ScanButton extends StatelessWidget {
       elevation: 0,
       highlightElevation: 0,
       child: Icon(Icons.qr_code_scanner),
-      onPressed: () {
-        // If user cancels value is -1
-        // String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#3D8BEF', 'Cancelar', false, ScanMode.QR);
+      onPressed: () async {
+        // If user cancels value of scan is -1
+
+        final scanResult = 'geo:15.0,20.0';
+
+        if (scanResult == '-1') {
+          return;
+        }
+
+        final scanListProvider =
+            Provider.of<ScanListProvider>(context, listen: false);
+
+        final ScanModel newScan = await scanListProvider.newScan(scanResult);
+
+        launchURL(context, newScan);
       },
     );
   }

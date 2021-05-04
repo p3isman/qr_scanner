@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:qr_scanner/models/scan_model.dart';
 export 'package:qr_scanner/models/scan_model.dart';
 
+// Back-end database
 class DBProvider {
   static Database? _database;
 

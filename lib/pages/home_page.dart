@@ -8,7 +8,7 @@ import 'package:qr_scanner/pages/directions_page.dart';
 import 'package:qr_scanner/pages/maps_page.dart';
 
 import 'package:qr_scanner/providers/ui_provider.dart';
-import 'package:qr_scanner/providers/db_provider.dart';
+import 'package:qr_scanner/providers/scan_list_provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -19,7 +19,10 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.delete_forever),
-            onPressed: () {},
+            onPressed: () {
+              Provider.of<ScanListProvider>(context, listen: false)
+                  .deleteAllScans();
+            },
           ),
         ],
       ),
@@ -39,17 +42,17 @@ class _HomePageBody extends StatelessWidget {
 
     final currentIndex = uiProvider.selectedMenuOpt;
 
-    final tempScan = new ScanModel(value: 'http://duckduckgo.com');
-
-    // Read database
-    DBProvider.db.newScan(tempScan);
+    final scanListProvider =
+        Provider.of<ScanListProvider>(context, listen: false);
 
     // Tab management
     switch (currentIndex) {
       case 0:
+        scanListProvider.loadScansByType('geo');
         return MapsPage();
 
       case 1:
+        scanListProvider.loadScansByType('http');
         return DirectionsPage();
 
       default:
