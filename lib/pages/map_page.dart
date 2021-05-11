@@ -10,29 +10,63 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+  // Creates a future from scratch. Used to return a future when the callback is called (map is ready to use).
   Completer<GoogleMapController> _controller = Completer();
 
-  final CameraPosition _initialPosition = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  /// Type of map
+  MapType _mapType = MapType.normal;
 
   @override
   Widget build(BuildContext context) {
     final ScanModel scan =
         ModalRoute.of(context)!.settings.arguments as ScanModel;
 
+    final CameraPosition _initialPosition = CameraPosition(
+      target: scan.getCoordinates(),
+      zoom: 17,
+    );
+
+    // Markers
+    Set<Marker> markers = new Set<Marker>();
+    markers.add(new Marker(
+      markerId: MarkerId('geo-location'),
+      position: scan.getCoordinates(),
+    ));
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Coordenadas'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.location_on),
+              // Animates camera to the original position
+              onPressed: () async {
+                final GoogleMapController controller = await _controller.future;
+                controller.animateCamera(
+                    CameraUpdate.newCameraPosition(_initialPosition));
+              })
+        ],
       ),
       body: GoogleMap(
-        mapType: MapType.normal,
+        mapType: _mapType,
+        markers: markers,
         initialCameraPosition: _initialPosition,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 30.0),
+        child: FloatingActionButton(
+          child: Icon(Icons.layers),
+          onPressed: () {
+            _mapType =
+                _mapType == MapType.normal ? MapType.satellite : MapType.normal;
+            setState(() {});
+          },
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }

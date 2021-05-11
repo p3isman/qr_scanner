@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:qr_scanner/models/scan_model.dart';
 
+/// Launches a URL in browser
 void launchURL(BuildContext context, ScanModel scan) async {
   final url = scan.value;
 

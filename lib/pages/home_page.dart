@@ -6,6 +6,7 @@ import 'package:qr_scanner/widgets/scan_button.dart';
 
 import 'package:qr_scanner/pages/directions_page.dart';
 import 'package:qr_scanner/pages/maps_page.dart';
+import 'empty_page.dart';
 
 import 'package:qr_scanner/providers/ui_provider.dart';
 import 'package:qr_scanner/providers/scan_list_provider.dart';
@@ -49,11 +50,17 @@ class _HomePageBody extends StatelessWidget {
     switch (currentIndex) {
       case 0:
         scanListProvider.loadScansByType('geo');
-        return MapsPage();
+        if (scanListProvider.scans.isEmpty)
+          return EmptyPage();
+        else
+          return MapsPage();
 
       case 1:
         scanListProvider.loadScansByType('http');
-        return DirectionsPage();
+        if (scanListProvider.scans.isEmpty)
+          return EmptyPage();
+        else
+          return DirectionsPage();
 
       default:
         return MapsPage();

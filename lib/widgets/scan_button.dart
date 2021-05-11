@@ -15,13 +15,12 @@ class ScanButton extends StatelessWidget {
       highlightElevation: 0,
       child: Icon(Icons.qr_code_scanner),
       onPressed: () async {
+        String scanResult = await FlutterBarcodeScanner.scanBarcode(
+            '#3D8BEF', 'Cancelar', false, ScanMode.QR);
+
         // If user cancels value of scan is -1
 
-        final scanResult = 'geo:15.0,20.0';
-
-        if (scanResult == '-1') {
-          return;
-        }
+        if (scanResult == '-1') return;
 
         final scanListProvider =
             Provider.of<ScanListProvider>(context, listen: false);
