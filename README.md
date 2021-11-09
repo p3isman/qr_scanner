@@ -1,4 +1,4 @@
-# Flutter QR Scanner
+# QR Scanner
 
 A QR Scanner made with Flutter.
 
