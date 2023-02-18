@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:qr_scanner/providers/ui_provider.dart';
 
-class NavigationBar extends StatelessWidget {
+class CustomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uiProvider = Provider.of<UiProvider>(context);
