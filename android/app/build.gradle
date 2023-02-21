@@ -32,7 +32,7 @@ def keystoreProperties = new Properties()
    }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -40,7 +40,7 @@ android {
 
     defaultConfig {
         applicationId "com.magusstudio.qr_scanner"
-        minSdkVersion 16
+        minSdkVersion 20
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
