@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qr_scanner/providers/db_provider.dart';
+
+import 'db_provider.dart';
 
 // Front-end for the scans
 class ScanListProvider extends ChangeNotifier {
@@ -24,26 +25,26 @@ class ScanListProvider extends ChangeNotifier {
     return scan;
   }
 
-  void loadScans() async {
+  Future<void> loadScans() async {
     final allScans = await DBProvider.db.getAllScans();
     this.scans = [...allScans];
     notifyListeners();
   }
 
-  void loadScansByType(String type) async {
+  Future<void> loadScansByType(String type) async {
     final loadedScans = await DBProvider.db.getScansByType(type);
     this.scans = [...loadedScans];
     this.selectedType = type;
     notifyListeners();
   }
 
-  void deleteAllScans() async {
+  Future<void> deleteAllScans() async {
     await DBProvider.db.deleteAllScans();
     this.scans = [];
     notifyListeners();
   }
 
-  void deleteScanById(int id) async {
+  Future<void> deleteScanById(int id) async {
     await DBProvider.db.deleteScan(id);
     // Reload list
     loadScansByType(selectedType);

@@ -44,19 +44,35 @@ class _HomePageBody extends StatelessWidget {
     final scanListProvider =
         Provider.of<ScanListProvider>(context, listen: false);
 
-    // Tab management
+    return FutureBuilder(
+        future: _getScanListProvider(currentIndex, scanListProvider),
+        builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return snapshot.data as Widget;
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
+  }
+
+  Future<Widget> _getScanListProvider(
+      int currentIndex, ScanListProvider scanListProvider) async {
     switch (currentIndex) {
       case 0:
-        scanListProvider.loadScansByType('http');
+        await scanListProvider.loadScansByType('http');
         if (scanListProvider.scans.isEmpty)
-          return EmptyPage();
+          return EmptyPage(
+              'This tab displays all the website URLs you\'ve scanned. Start by scanning a QR code to add one.');
         else
           return DirectionsPage();
 
       case 1:
-        scanListProvider.loadScansByType('geo');
+        await scanListProvider.loadScansByType('geo');
         if (scanListProvider.scans.isEmpty)
-          return EmptyPage();
+          return EmptyPage(
+              'This tab displays all the location URLs you\'ve scanned. Start by scanning a QR code to add one.');
         else
           return MapsPage();
 
