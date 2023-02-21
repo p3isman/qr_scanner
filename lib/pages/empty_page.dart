@@ -12,7 +12,7 @@ class EmptyPage extends StatelessWidget {
             size: 200.0,
           ),
         ),
-        Text('Escanea un código QR para comenzar'),
+        Text('Scan your first QR.'),
       ],
     );
   }

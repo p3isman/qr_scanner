@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Historial'),
+        title: Text('History'),
         actions: [
           IconButton(
             icon: Icon(Icons.delete_forever),

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:qr_scanner/models/scan_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:qr_scanner/models/scan_model.dart';
 
 class MapPage extends StatefulWidget {
   @override
@@ -35,7 +35,7 @@ class _MapPageState extends State<MapPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Coordenadas'),
+        title: Text('Coordinates'),
         actions: [
           IconButton(
               icon: Icon(Icons.location_on),
