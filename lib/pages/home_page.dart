@@ -47,21 +47,21 @@ class _HomePageBody extends StatelessWidget {
     // Tab management
     switch (currentIndex) {
       case 0:
-        scanListProvider.loadScansByType('geo');
-        if (scanListProvider.scans.isEmpty)
-          return EmptyPage();
-        else
-          return MapsPage();
-
-      case 1:
         scanListProvider.loadScansByType('http');
         if (scanListProvider.scans.isEmpty)
           return EmptyPage();
         else
           return DirectionsPage();
 
+      case 1:
+        scanListProvider.loadScansByType('geo');
+        if (scanListProvider.scans.isEmpty)
+          return EmptyPage();
+        else
+          return MapsPage();
+
       default:
-        return MapsPage();
+        return DirectionsPage();
     }
   }
 }

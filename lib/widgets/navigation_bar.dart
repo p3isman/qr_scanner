@@ -7,22 +7,20 @@ class CustomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiProvider = Provider.of<UiProvider>(context);
 
-    final currentIndex = uiProvider.selectedMenuOpt;
-
     return BottomNavigationBar(
       elevation: 0,
       onTap: (i) {
         uiProvider.selectedMenuOpt = i;
       },
-      currentIndex: currentIndex,
+      currentIndex: uiProvider.selectedMenuOpt,
       items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          label: 'Map',
-        ),
         BottomNavigationBarItem(
           icon: Icon(Icons.wifi_tethering_rounded),
           label: 'Directions',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.map),
+          label: 'Map',
         ),
       ],
     );
