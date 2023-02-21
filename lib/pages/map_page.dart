@@ -35,7 +35,7 @@ class _MapPageState extends State<MapPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Coordinates'),
+        title: const Text('Location'),
         actions: [
           IconButton(
               icon: const Icon(Icons.location_on),
