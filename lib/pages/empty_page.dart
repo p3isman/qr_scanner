@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class EmptyPage extends StatelessWidget {
+  final String message;
+
+  EmptyPage(this.message);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,7 +16,13 @@ class EmptyPage extends StatelessWidget {
             size: 200.0,
           ),
         ),
-        Text('Scan your first QR.'),
+        Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Text(
+            message,
+            textAlign: TextAlign.center,
+          ),
+        )
       ],
     );
   }
