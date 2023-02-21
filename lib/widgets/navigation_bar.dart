@@ -8,7 +8,7 @@ class CustomNavigationBar extends StatelessWidget {
     final uiProvider = Provider.of<UiProvider>(context);
 
     return BottomNavigationBar(
-      elevation: 0,
+      elevation: 20,
       onTap: (i) {
         uiProvider.selectedMenuOpt = i;
       },
@@ -16,11 +16,11 @@ class CustomNavigationBar extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.wifi_tethering_rounded),
-          label: 'Directions',
+          label: 'Websites',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.map),
-          label: 'Map',
+          label: 'Locations',
         ),
       ],
     );
