@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:qr_scanner/models/scan_model.dart';
 import 'package:qr_scanner/providers/db_provider.dart';
 
 // Front-end for the scans
