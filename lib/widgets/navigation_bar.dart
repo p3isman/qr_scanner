@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qr_scanner/providers/ui_provider.dart';
+import '../providers/ui_provider.dart';
 
 class CustomNavigationBar extends StatelessWidget {
   @override

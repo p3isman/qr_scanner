@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qr_scanner/pages/directions_page.dart';
-import 'package:qr_scanner/pages/maps_page.dart';
-import 'package:qr_scanner/providers/scan_list_provider.dart';
-import 'package:qr_scanner/providers/ui_provider.dart';
-import 'package:qr_scanner/widgets/navigation_bar.dart';
-import 'package:qr_scanner/widgets/scan_button.dart';
 
+import '../providers/scan_list_provider.dart';
+import '../providers/ui_provider.dart';
+import '../widgets/navigation_bar.dart';
+import '../widgets/scan_button.dart';
+import 'directions_page.dart';
 import 'empty_page.dart';
+import 'maps_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -36,11 +36,8 @@ class HomePage extends StatelessWidget {
 class _HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Get current tab
     final uiProvider = Provider.of<UiProvider>(context);
-
     final currentIndex = uiProvider.selectedMenuOpt;
-
     final scanListProvider =
         Provider.of<ScanListProvider>(context, listen: false);
 

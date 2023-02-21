@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:qr_scanner/models/scan_model.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../models/scan_model.dart';
 
 export 'package:qr_scanner/models/scan_model.dart';
 
