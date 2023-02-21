@@ -29,16 +29,16 @@ class _MapPageState extends State<MapPage> {
     // Markers
     Set<Marker> markers = new Set<Marker>();
     markers.add(new Marker(
-      markerId: MarkerId('geo-location'),
+      markerId: const MarkerId('geo-location'),
       position: scan.getCoordinates(),
     ));
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Coordinates'),
+        title: const Text('Coordinates'),
         actions: [
           IconButton(
-              icon: Icon(Icons.location_on),
+              icon: const Icon(Icons.location_on),
               // Animates camera to the original position
               onPressed: () async {
                 final GoogleMapController controller = await _controller.future;
@@ -58,7 +58,7 @@ class _MapPageState extends State<MapPage> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 30.0),
         child: FloatingActionButton(
-          child: Icon(Icons.layers),
+          child: const Icon(Icons.layers),
           onPressed: () {
             _mapType =
                 _mapType == MapType.normal ? MapType.satellite : MapType.normal;

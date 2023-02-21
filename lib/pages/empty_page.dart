@@ -6,7 +6,7 @@ class EmptyPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Center(
+        const Center(
           child: Icon(
             Icons.qr_code,
             size: 200.0,

@@ -17,8 +17,8 @@ class ListTiles extends StatelessWidget {
     final controller = ScrollController();
 
     return ListView.builder(
+        padding: const EdgeInsets.only(bottom: 35.0),
         controller: controller,
-        reverse: true,
         itemCount: scans.length,
         itemBuilder: (context, i) {
           return Dismissible(
@@ -29,10 +29,11 @@ class ListTiles extends StatelessWidget {
                   .deleteScanById(scans[i].id!);
             },
             child: ListTile(
-              leading: this.type == 'http' ? Icon(Icons.home) : Icon(Icons.map),
+              leading: this.type == 'http'
+                  ? const Icon(Icons.home)
+                  : const Icon(Icons.map),
               title: Text(scans[i].value),
-              subtitle: Text(scans[i].id.toString()),
-              trailing: Icon(Icons.keyboard_arrow_right),
+              trailing: const Icon(Icons.keyboard_arrow_right),
               onTap: () {
                 launchURL(context, scans[i]);
               },
