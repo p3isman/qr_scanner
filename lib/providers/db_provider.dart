@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'package:qr_scanner/models/scan_model.dart';
+import 'package:sqflite/sqflite.dart';
+
 export 'package:qr_scanner/models/scan_model.dart';
 
 // Back-end database
@@ -31,7 +31,6 @@ class DBProvider {
     // Get database path
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentsDirectory.path, 'ScansDB.db');
-    print(path);
 
     // Create database and return it
     return await openDatabase(
