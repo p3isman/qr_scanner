@@ -13,7 +13,8 @@ class ListTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scanListProvider = Provider.of<ScanListProvider>(context);
+    final scanListProvider =
+        Provider.of<ScanListProvider>(context, listen: false);
     final scans = scanListProvider.scans;
 
     final controller = ScrollController();
