@@ -11,16 +11,16 @@ class EmptyPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Center(
-          child: Icon(
-            Icons.qr_code,
-            size: 200.0,
-          ),
+          child: Icon(Icons.qr_code, size: 200.0, color: Colors.teal),
         ),
         Padding(
           padding: const EdgeInsets.all(25.0),
           child: Text(
             message,
             textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+            ),
           ),
         )
       ],
