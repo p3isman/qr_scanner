@@ -21,7 +21,7 @@ class ScanModel {
   ScanModel({this.id, this.type, required this.value}) {
     if (this.value.contains('http')) {
       this.type = 'http';
-    } else {
+    } else if (_isCoordinate(this.value)) {
       this.type = 'geo';
     }
   }
@@ -43,10 +43,33 @@ class ScanModel {
   /// Extracts coordinates from the scan's value
   LatLng getCoordinates() {
     final coordinates = this.value.substring(4).split(',');
-    final latitude = double.parse(coordinates[0]);
-    final longitude = double.parse(coordinates[1]);
-    final LatLng latlng = LatLng(latitude, longitude);
+    final lat = double.parse(coordinates[0]);
+    final lng = double.parse(coordinates[1]);
+    final LatLng latlng = LatLng(lat, lng);
 
     return latlng;
+  }
+
+  bool _isCoordinate(String str) {
+    List<String> parts = str.substring(4).split(',');
+    if (parts.length != 2) {
+      return false;
+    }
+
+    double? lat = double.tryParse(parts[0]);
+    if (lat == null) return false;
+
+    double? lng = double.tryParse(parts[1]);
+    if (lng == null) return false;
+
+    if (lat < -90 || lat > 90) {
+      return false;
+    }
+
+    if (lng < -180 || lng > 180) {
+      return false;
+    }
+
+    return true;
   }
 }

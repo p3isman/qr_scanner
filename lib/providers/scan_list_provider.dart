@@ -8,9 +8,13 @@ class ScanListProvider extends ChangeNotifier {
   String selectedType = 'http';
 
   /// Stores a new scan
-  Future<ScanModel> newScan(String value) async {
+  Future<ScanModel?> newScan(String value) async {
     // Create a new ScanModel
     final scan = new ScanModel(value: value);
+
+    if (scan.type == null) {
+      return null;
+    }
 
     // Store scan in database and generate an ID
     final id = await DBProvider.db.newScan(scan);
