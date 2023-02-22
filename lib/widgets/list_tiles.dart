@@ -84,7 +84,7 @@ class ListTiles extends StatelessWidget {
             child: ListTile(
               leading: this.type == 'http'
                   ? const Icon(Icons.link)
-                  : const Icon(Icons.map),
+                  : const Icon(Icons.location_on),
               title: Text(scans[i].value),
               trailing: const Icon(Icons.keyboard_arrow_right),
               onTap: () {
