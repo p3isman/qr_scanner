@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
             'map': (context) => MapPage(),
           },
           theme: ThemeData(
-            primarySwatch: Colors.deepPurple,
+            primarySwatch: Colors.teal,
           )),
     );
   }
