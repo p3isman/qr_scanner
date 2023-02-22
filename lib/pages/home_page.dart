@@ -14,15 +14,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('History'),
+        title: Text('QR Scanner'),
         actions: [
-          IconButton(
-            icon: Icon(Icons.delete_forever),
-            onPressed: () {
-              Provider.of<ScanListProvider>(context, listen: false)
-                  .deleteAllScans();
-            },
-          ),
+          Provider.of<ScanListProvider>(context, listen: false).scans.isEmpty
+              ? SizedBox()
+              : IconButton(
+                  icon: Icon(Icons.delete_forever, color: Colors.white),
+                  onPressed: () => _onDeletePressed(context),
+                ),
         ],
       ),
       body: _HomePageBody(),
@@ -30,6 +29,32 @@ class HomePage extends StatelessWidget {
       floatingActionButton: ScanButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
+  }
+
+  _onDeletePressed(BuildContext context) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text('Confirm Deletion'),
+              content: Text('Are you sure you want to delete all items?'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Cancel'),
+                ),
+                TextButton(
+                    onPressed: () async {
+                      await Provider.of<ScanListProvider>(context,
+                              listen: false)
+                          .deleteAllScans();
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Delete'))
+              ]);
+        });
   }
 }
 
