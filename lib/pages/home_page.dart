@@ -72,9 +72,7 @@ class _HomePageBody extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return snapshot.data as Widget;
           } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return SizedBox();
           }
         });
   }
