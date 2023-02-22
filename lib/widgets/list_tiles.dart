@@ -51,8 +51,8 @@ class ListTiles extends StatelessWidget {
                 ),
               ),
             ),
-            onDismissed: (_) {
-              showDialog(
+            confirmDismiss: (_) async {
+              return await showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
@@ -62,15 +62,13 @@ class ListTiles extends StatelessWidget {
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.of(context).pop(false);
                         },
                         child: const Text('Cancel'),
                       ),
                       TextButton(
-                        onPressed: () {
-                          Provider.of<ScanListProvider>(context, listen: false)
-                              .deleteScanById(scans[i].id!);
-                          Navigator.of(context).pop();
+                        onPressed: () async {
+                          Navigator.of(context).pop(true);
                         },
                         child: const Text('Delete'),
                       ),
@@ -78,6 +76,10 @@ class ListTiles extends StatelessWidget {
                   );
                 },
               );
+            },
+            onDismissed: (_) async {
+              await Provider.of<ScanListProvider>(context, listen: false)
+                  .deleteScanById(scans[i].id!);
             },
             child: ListTile(
               leading: this.type == 'http'
