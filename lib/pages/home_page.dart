@@ -52,7 +52,7 @@ class _CustomAppBar extends StatelessWidget implements PreferredSize {
         builder: (BuildContext context) {
           return AlertDialog(
               title: Text('Confirm Deletion'),
-              content: Text('Are you sure you want to delete all items?'),
+              content: Text('Are you sure you want to delete all scans?'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
