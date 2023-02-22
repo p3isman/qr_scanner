@@ -20,6 +20,8 @@ class ListTiles extends StatelessWidget {
     final controller = ScrollController();
 
     return ListView.builder(
+        reverse: true,
+        shrinkWrap: true,
         padding: const EdgeInsets.only(bottom: 35.0),
         controller: controller,
         itemCount: scans.length,
