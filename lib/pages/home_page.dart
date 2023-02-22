@@ -6,30 +6,45 @@ import '../providers/ui_provider.dart';
 import '../widgets/navigation_bar.dart';
 import '../widgets/scan_button.dart';
 import 'directions_page.dart';
-import 'empty_page.dart';
 import 'maps_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('QR Scanner'),
-        actions: [
-          Provider.of<ScanListProvider>(context, listen: false).scans.isEmpty
-              ? SizedBox()
-              : IconButton(
-                  icon: Icon(Icons.delete_forever, color: Colors.white),
-                  onPressed: () => _onDeletePressed(context),
-                ),
-        ],
-      ),
+      appBar: _CustomAppBar(),
       body: _HomePageBody(),
       bottomNavigationBar: CustomNavigationBar(),
       floatingActionButton: ScanButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
+}
+
+class _CustomAppBar extends StatelessWidget implements PreferredSize {
+  @override
+  Widget build(BuildContext context) {
+    final scanListProvider = Provider.of<ScanListProvider>(context);
+    final scans = scanListProvider.scans;
+
+    return AppBar(
+      title: Text('QR Scanner'),
+      actions: [
+        scans.isEmpty
+            ? SizedBox()
+            : IconButton(
+                icon: Icon(Icons.delete_forever, color: Colors.white),
+                onPressed: () => _onDeletePressed(context),
+              ),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget get child => child;
 
   _onDeletePressed(BuildContext context) async {
     await showDialog(
@@ -82,19 +97,11 @@ class _HomePageBody extends StatelessWidget {
     switch (currentIndex) {
       case 0:
         await scanListProvider.loadScansByType('http');
-        if (scanListProvider.scans.isEmpty)
-          return EmptyPage(
-              'This tab displays all the website URLs you\'ve scanned. Start by scanning a QR code to add one.');
-        else
-          return DirectionsPage();
+        return DirectionsPage();
 
       case 1:
         await scanListProvider.loadScansByType('geo');
-        if (scanListProvider.scans.isEmpty)
-          return EmptyPage(
-              'This tab displays all the location URLs you\'ve scanned. Start by scanning a QR code to add one.');
-        else
-          return MapsPage();
+        return MapsPage();
 
       default:
         return DirectionsPage();
