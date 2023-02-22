@@ -24,7 +24,18 @@ class ScanButton extends StatelessWidget {
         final scanListProvider =
             Provider.of<ScanListProvider>(context, listen: false);
 
-        final ScanModel newScan = await scanListProvider.newScan(scanResult);
+        final ScanModel? newScan = await scanListProvider.newScan(scanResult);
+
+        if (newScan == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                  'This QR code does not contain a website URL or a location.'),
+              backgroundColor: Colors.red,
+            ),
+          );
+          return;
+        }
 
         launchURL(context, newScan);
       },
