@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../providers/ui_provider.dart';
 
 class CustomNavigationBar extends StatelessWidget {
@@ -15,11 +16,11 @@ class CustomNavigationBar extends StatelessWidget {
       currentIndex: uiProvider.selectedMenuOpt,
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.wifi_tethering_rounded),
+          icon: Icon(Icons.public),
           label: 'Websites',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.map),
+          icon: Icon(Icons.location_on),
           label: 'Locations',
         ),
       ],
