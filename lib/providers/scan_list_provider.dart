@@ -9,7 +9,6 @@ class ScanListProvider extends ChangeNotifier {
 
   /// Stores a new scan
   Future<ScanModel?> newScan(String value) async {
-    // Create a new ScanModel
     final scan = new ScanModel(value: value);
 
     if (scan.type == null) {
@@ -20,11 +19,8 @@ class ScanListProvider extends ChangeNotifier {
     final id = await DBProvider.db.newScan(scan);
     scan.id = id;
 
-    // Add scan to current list if its type is the currently selected
-    if (scan.type == selectedType) {
-      scans.add(scan);
-      notifyListeners();
-    }
+    scans.add(scan);
+    notifyListeners();
 
     return scan;
   }
