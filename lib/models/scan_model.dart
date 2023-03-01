@@ -23,7 +23,10 @@ class ScanModel {
       this.type = 'http';
     } else if (_isCoordinate(this.value)) {
       this.type = 'geo';
+    } else {
+      this.type = 'other';
     }
+    // TODO: check for phone numbers and other types
   }
 
   /// Creates a new ScanModel from a JSON
