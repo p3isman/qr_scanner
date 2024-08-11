@@ -5,7 +5,9 @@ import 'db_provider.dart';
 // Front-end for the scans
 class ScanListProvider extends ChangeNotifier {
   List<ScanModel> scans = [];
-  String selectedType = 'http';
+  List<ScanModel> filteredScans = [];
+
+  List<String> selectedTypes = [];
 
   /// Stores a new scan
   Future<ScanModel?> newScan(String value) async {
@@ -34,7 +36,6 @@ class ScanListProvider extends ChangeNotifier {
   Future<void> loadScansByType(String type) async {
     final loadedScans = await DBProvider.db.getScansByType(type);
     this.scans = [...loadedScans];
-    this.selectedType = type;
     notifyListeners();
   }
 
@@ -46,8 +47,7 @@ class ScanListProvider extends ChangeNotifier {
 
   Future<void> deleteScanById(int id) async {
     await DBProvider.db.deleteScan(id);
-    // Reload list
-    loadScansByType(selectedType);
+    this.scans.removeWhere((scan) => scan.id == id);
     notifyListeners();
   }
 }

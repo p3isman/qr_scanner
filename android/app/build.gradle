@@ -40,7 +40,7 @@ android {
 
     defaultConfig {
         applicationId "com.magusstudio.qr_scanner"
-        minSdkVersion 20
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

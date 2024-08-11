@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'pages/home_page.dart';
 import 'pages/map_page.dart';
 import 'providers/scan_list_provider.dart';
-import 'providers/ui_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +13,6 @@ class MyApp extends StatelessWidget {
     // Set multiple providers
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => new UiProvider()),
         ChangeNotifierProvider(create: (context) => new ScanListProvider()),
       ],
       child: MaterialApp(

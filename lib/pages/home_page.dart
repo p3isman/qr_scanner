@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/scan_list_provider.dart';
-import '../providers/ui_provider.dart';
-import '../widgets/navigation_bar.dart';
+import '../widgets/list_tiles.dart';
 import '../widgets/scan_button.dart';
-import 'directions_page.dart';
-import 'maps_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -14,9 +11,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: _CustomAppBar(),
       body: _HomePageBody(),
-      bottomNavigationBar: CustomNavigationBar(),
       floatingActionButton: ScanButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
@@ -30,11 +26,15 @@ class _CustomAppBar extends StatelessWidget implements PreferredSize {
     return AppBar(
       title: Text('QR Scanner'),
       actions: [
+        IconButton(
+          onPressed: () => _onFilterPressed(context),
+          icon: Icon(Icons.filter_alt),
+        ),
         scans.isEmpty
             ? SizedBox()
             : IconButton(
-                icon: Icon(Icons.delete_forever, color: Colors.white),
                 onPressed: () => _onDeletePressed(context),
+                icon: Icon(Icons.delete_forever, color: Colors.white),
               ),
       ],
     );
@@ -46,7 +46,30 @@ class _CustomAppBar extends StatelessWidget implements PreferredSize {
   @override
   Widget get child => child;
 
-  _onDeletePressed(BuildContext context) async {
+  void _onFilterPressed(BuildContext context) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: Text('Filter by type'),
+              content: Column(
+                  children: [CheckboxListTile(value: value, onChanged: () {})]),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          });
+        });
+  }
+
+  void _onDeletePressed(BuildContext context) async {
     await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -76,35 +99,17 @@ class _CustomAppBar extends StatelessWidget implements PreferredSize {
 class _HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final uiProvider = Provider.of<UiProvider>(context);
-    final currentIndex = uiProvider.selectedMenuOpt;
     final scanListProvider =
         Provider.of<ScanListProvider>(context, listen: false);
 
     return FutureBuilder(
-        future: _getScanListProvider(currentIndex, scanListProvider),
-        builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+        future: scanListProvider.loadScans(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return snapshot.data as Widget;
+            return ListTiles();
           } else {
             return SizedBox();
           }
         });
-  }
-
-  Future<Widget> _getScanListProvider(
-      int currentIndex, ScanListProvider scanListProvider) async {
-    switch (currentIndex) {
-      case 0:
-        await scanListProvider.loadScansByType('http');
-        return DirectionsPage();
-
-      case 1:
-        await scanListProvider.loadScansByType('geo');
-        return MapsPage();
-
-      default:
-        return DirectionsPage();
-    }
   }
 }
